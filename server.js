@@ -42,7 +42,7 @@ const loadPrices = async() => {
         const coinId = coinIdsArray[id];
 
         // API request
-        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=USD&days=3&interval=daily`;
+        const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=USD&days=5&interval=daily`;
         const res = await fetch(url);
         console.log(coinId + " request was successful: " + res.ok);
 
@@ -62,6 +62,13 @@ const loadPrices = async() => {
             yestPrice: coinPrice
         }
         coinPrices.push(coinObject);
+        
+        console.log("PRICE DATES IN READABLE FORMAT...");
+        // const date = new Date((coinPrices[id]["yestPrice"][1][0])); // coinPrices -- first element in object -- "yestPrice" selected -- first sub-array in yestPrice -- first element of sub-sub-array (i.e the milliseconds since 1970)
+        // console.log(new Date((coinPrices[id]["yestPrice"][0][0])));
+        // console.log(new Date((coinPrices[id]["yestPrice"][1][0])));
+        // console.log(new Date((coinPrices[id]["yestPrice"][2][0])));
+        // console.log(new Date((coinPrices[id]["yestPrice"][3][0])));
     }
 
     return coinPrices;
