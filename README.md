@@ -1,6 +1,14 @@
 # Coingecko API
 
-Using Node's native https library to call the Coingecko API V3 (open API, no auth).
+Uses fetch() to call the Coingecko V3 API.
 
-Plan is to loop over the main '/coins' endpoint...
-...then use that to pull price data for previous XX days.
+Done:
+* Fetches "/coins/markets"
+* Uses returned coin ids to fetch prices history from "/coins/${coinId}/market_chart"
+
+Next:
+* combine specific data to single js objects
+* use mongoose to save to MongoDB cloud
+* set up chron jobs to periodically fetch API requests
+
+- Adam
