@@ -37,12 +37,9 @@ const coinIdsArray = await loadCoins().then(data => data); // Async-Await return
 const coinPrices = [];
 
 const loadPrices = async() => {
-    // console.log("Index 0 of coinIdsArray is " + coinIdsArray[0] + " and is type " + typeof coinIdsArray[0]);
-
     for(const id in coinIdsArray) {
         // Access 'coinid' for use in API request
         const coinId = coinIdsArray[id];
-        // console.log(id + " is: " + coinId);
 
         // API request
         const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=USD&days=3&interval=daily`;
@@ -60,13 +57,11 @@ const loadPrices = async() => {
             coinPrice.push(data["prices"][day]);
         }
 
-        // const coinPrice = data["prices"][0];
         const coinObject = {
             id: coinId,
             yestPrice: coinPrice
         }
         coinPrices.push(coinObject);
-        // console.log(coinObject);
     }
 
     return coinPrices;
