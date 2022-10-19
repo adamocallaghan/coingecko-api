@@ -51,11 +51,16 @@ const loadPrices = async() => {
 
         // Get response + convert to json
         const data = await res.json();
-        // console.log(data["prices"][0]);
-        // console.log(data);
 
         // Create coinObject using data from both API requests + push to array
-        const coinPrice = data["prices"][0];
+        const coinPrice = [];
+
+        for(const day in data["prices"]) {
+            console.log(data["prices"][day]);
+            coinPrice.push(data["prices"][day]);
+        }
+
+        // const coinPrice = data["prices"][0];
         const coinObject = {
             id: coinId,
             yestPrice: coinPrice
@@ -69,6 +74,7 @@ const loadPrices = async() => {
 
 const coinPricesArray = await loadPrices().then(data => data);  // Async-Await returns a Promise, hence we need to resolve it in order to use it
 console.log("============== coinPrices[] is... =============");
-console.log(coinPricesArray);
+console.log(coinPricesArray); // won't expand the nested price arrays
+console.log(JSON.stringify(coinPricesArray)); // stringify to see all the data
 
 // ***** Mongoose will do it's magic here and persist the coinPrices[] array to MongoDB cloud *****
