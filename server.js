@@ -34,9 +34,10 @@ const coinIdsArray = await loadCoins().then(data => data); // Async-Await return
         ################################################################
 */
 
-const coinPrices = [];
-
 const loadPrices = async() => {
+
+    const coinPrices = [];
+    
     for(const id in coinIdsArray) {
         // Access 'coinid' for use in API request
         const coinId = coinIdsArray[id];
@@ -50,35 +51,29 @@ const loadPrices = async() => {
         const data = await res.json();
 
         // Create coinObject using data from both API requests + push to array
-        const coinPrice = [];
-        let newCoinPrice;
+        const coinPriceArray = [];
+        let coinPriceObject = {};
 
         for(const day in data["prices"]) {
-            // console.log(data["prices"][day]);
+
+            // Push day array to coinPriceArray array
+            coinPriceArray.push(data["prices"][day]);
+
+            // Objects created for each day and saved to/nested in main newCoinPrice object
             const todaysDate = new Date(data["prices"][day][0]);
-            console.log(new Date(data["prices"][day][0]));
-            const todaysPrice = data["prices"][day][1];
-            console.log(todaysPrice.toFixed(4));
-            coinPrice.push(data["prices"][day]);
-            newCoinPrice = {
-                coinPrice: todaysPrice,
-                coinPriceDate: todaysDate
+            const todaysPrice = (data["prices"][day][1]).toFixed(4);
+            coinPriceObject["Day " + day] = {
+                todaysPrice: todaysPrice,
+                todaysDate: todaysDate
             }
         }
 
         const coinObject = {
             id: coinId,
-            yestPrice: coinPrice,
-            coinPrices: newCoinPrice
+            coinPrices_Array: coinPriceArray,
+            coinPrices_Object: coinPriceObject
         }
         coinPrices.push(coinObject);
-        
-        console.log("PRICE DATES IN READABLE FORMAT...");
-        // const date = new Date((coinPrices[id]["yestPrice"][1][0])); // coinPrices -- first element in object -- "yestPrice" selected -- first sub-array in yestPrice -- first element of sub-sub-array (i.e the milliseconds since 1970)
-        // console.log(new Date((coinPrices[id]["yestPrice"][0][0])));
-        // console.log(new Date((coinPrices[id]["yestPrice"][1][0])));
-        // console.log(new Date((coinPrices[id]["yestPrice"][2][0])));
-        // console.log(new Date((coinPrices[id]["yestPrice"][3][0])));
     }
 
     return coinPrices;
