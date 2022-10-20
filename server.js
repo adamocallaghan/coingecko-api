@@ -37,7 +37,7 @@ const coinIdsArray = await loadCoins().then(data => data); // Async-Await return
 const loadPrices = async() => {
 
     const coinPrices = [];
-    
+
     for(const id in coinIdsArray) {
         // Access 'coinid' for use in API request
         const coinId = coinIdsArray[id];
