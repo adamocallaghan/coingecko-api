@@ -51,15 +51,25 @@ const loadPrices = async() => {
 
         // Create coinObject using data from both API requests + push to array
         const coinPrice = [];
+        let newCoinPrice;
 
         for(const day in data["prices"]) {
-            console.log(data["prices"][day]);
+            // console.log(data["prices"][day]);
+            const todaysDate = new Date(data["prices"][day][0]);
+            console.log(new Date(data["prices"][day][0]));
+            const todaysPrice = data["prices"][day][1];
+            console.log(todaysPrice.toFixed(4));
             coinPrice.push(data["prices"][day]);
+            newCoinPrice = {
+                coinPrice: todaysPrice,
+                coinPriceDate: todaysDate
+            }
         }
 
         const coinObject = {
             id: coinId,
-            yestPrice: coinPrice
+            yestPrice: coinPrice,
+            coinPrices: newCoinPrice
         }
         coinPrices.push(coinObject);
         
