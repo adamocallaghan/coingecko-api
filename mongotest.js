@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { User } from "./models.js";
+import { Coin } from "./coinSchema.js";
 
 import * as dotenv from 'dotenv';
 dotenv.config()
@@ -17,18 +18,18 @@ db.once("open", function () {
   console.log("Connected successfully");
 });
 
-const saveUser = async (request, response) => {
-  const user = new User({
-    name: "Alice",
-    age: 30
+const saveCoin = async (request, response) => {
+  const coin = new Coin({
+    "coinId":"idia",
+    "coinPrices_Object":{"Day 0":{"todaysPrice":"0.0766","todaysDate":"2022-10-17T00:00:00.000Z"},"Day 1":{"todaysPrice":"0.0753","todaysDate":"2022-10-18T00:00:00.000Z"},"Day 2":{"todaysPrice":"0.0726","todaysDate":"2022-10-19T00:00:00.000Z"},"Day 3":{"todaysPrice":"0.0832","todaysDate":"2022-10-20T00:00:00.000Z"},"Day 4":{"todaysPrice":"0.0775","todaysDate":"2022-10-21T00:00:00.000Z"},"Day 5":{"todaysPrice":"0.0776","todaysDate":"2022-10-21T10:29:12.000Z"}}
   });
 
   try {
-    await user.save();
-    console.log(user);
+    await coin.save();
+    console.log(coin);
   } catch (error) {
     console.log(error);
   }
 };
 
-saveUser();
+saveCoin();
