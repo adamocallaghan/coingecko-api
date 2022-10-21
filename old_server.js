@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import { connectMongoCloudFunction, saveCoinFunction } from "./mongotest.js";
 
 /*      #############################################################
         ###                                                       ###
@@ -65,15 +64,13 @@ const loadPrices = async() => {
             const todaysPrice = (data["prices"][day][1]).toFixed(4);
             coinPriceObject["Day " + day] = {
                 todaysPrice: todaysPrice,
-                todaysDate: todaysDate,
-                todaysDateMilliseconds: data["prices"][day][0],
-                todaysPriceLong: data["prices"][day][1]
+                todaysDate: todaysDate
             }
         }
 
         const coinObject = {
             id: coinId,
-            // coinPrices_Array: coinPriceArray,
+            coinPrices_Array: coinPriceArray,
             coinPrices_Object: coinPriceObject
         }
         coinPrices.push(coinObject);
@@ -88,12 +85,3 @@ console.log(coinPricesArray); // won't expand the nested price arrays
 console.log(JSON.stringify(coinPricesArray)); // stringify to see all the data
 
 // ***** Mongoose will do it's magic here and persist the coinPrices[] array to MongoDB cloud *****
-
-connectMongoCloudFunction;
-saveCoinFunction;
-
-for(const coinEntries in coinPricesArray) {
-    console.log("================START OF COIN =========================");
-    console.log(coinPricesArray[coinEntries]);
-    console.log("================END OF COIN =========================");
-}
