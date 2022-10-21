@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { User } from "./models.js";
 
 import * as dotenv from 'dotenv';
 dotenv.config()
@@ -11,7 +12,23 @@ const connectionString = `mongodb+srv://${mongoUsername}:${process.env.MONGO_PAS
 mongoose.connect(connectionString);
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error xyz: "));
+db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
   console.log("Connected successfully");
 });
+
+const saveUser = async (request, response) => {
+  const user = new User({
+    name: "Alice",
+    age: 30
+  });
+
+  try {
+    await user.save();
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+saveUser();
