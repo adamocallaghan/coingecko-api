@@ -47,7 +47,7 @@ const saveCoin = async (theCoin) => {
 };
 
 const saveTheCoin = {
-  "coinId":"murtilia",
+  "coinId":"bolardero",
   "coinPrices_Object":{
     "Day 0":{"todaysPrice":"0.0766","todaysDate":"2022-10-17T00:00:00.000Z","todaysDateMilliseconds":1665964800000,"todaysPriceLong":0.07662291659226893},
     "Day 1":{"todaysPrice":"0.0753","todaysDate":"2022-10-18T00:00:00.000Z","todaysDateMilliseconds":1666051200000,"todaysPriceLong":0.07534350952689779},
@@ -58,7 +58,7 @@ const saveTheCoin = {
   }
   }
 
-saveCoin(saveTheCoin);
+// saveCoin(saveTheCoin);
 
 export { connectMongoCloud };
 export { saveCoin };
