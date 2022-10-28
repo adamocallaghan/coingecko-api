@@ -11,7 +11,8 @@ import { connectMongoCloud, saveCoin } from "./mongotest.js";
 const loadCoins = async() => {
     let coinNames = [];
     // const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin&category=arbitrum-ecosystem&order=market_cap_rank&per_page=100&page=1&sparkline=false";
-    const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin&category=impossible-launchpad&order=market_cap_rank&per_page=5&page=1&sparkline=false";
+    // const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin&category=impossible-launchpad&order=market_cap_rank&per_page=5&page=1&sparkline=false";
+    const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=gmx%2Cmagic%2Cdopex&order=market_cap_desc&per_page=100&page=1&sparkline=false";
     const res = await fetch(url);
     console.log("Coingecko markets endpoint responsed successfully: " + res.ok);
 
