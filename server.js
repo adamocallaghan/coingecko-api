@@ -72,7 +72,7 @@ const loadPrices = async() => {
         }
 
         const coinObject = {
-            id: coinId,
+            coinId: coinId,
             // coinPrices_Array: coinPriceArray,
             coinPrices_Object: coinPriceObject
         }
@@ -84,8 +84,8 @@ const loadPrices = async() => {
 
 const coinPricesArray = await loadPrices().then(data => data);  // Async-Await returns a Promise, hence we need to resolve it in order to use it
 console.log("============== coinPrices[] is... =============");
-console.log(coinPricesArray); // won't expand the nested price arrays
-console.log(JSON.stringify(coinPricesArray)); // stringify to see all the data
+// console.log(coinPricesArray); // won't expand the nested price arrays
+// console.log(JSON.stringify(coinPricesArray)); // stringify to see all the data
 
 // ***** Mongoose will do it's magic here and persist the coinPrices[] array to MongoDB cloud *****
 
@@ -102,17 +102,10 @@ const theCoin = {
     }
 
 connectMongoCloud; // connect to MongoDB cloud
-// const didItSaveToCloud = await saveCoin(theCoin).then(data => data);
-// console.log(didItSaveToCloud);
 
-const didLiveDataSaveToCloud = await saveCoin(coinPricesArray).then(data => data);
-console.log(didLiveDataSaveToCloud);
+// Loop over CoinPricesArray and save each coin to MongoDB Cloud
+for (var coin in coinPricesArray) {
+    await saveCoin(coinPricesArray[coin]).then(data => data);
+    // console.log(coinPricesArray[coin]);
+}
 
-//saveCoin; // save hardcoded coin in mongotest.js --- to figure out how to pass parameters into this function
-
-
-// for(const coinEntries in coinPricesArray) {
-//     console.log("================START OF COIN =========================");
-//     console.log(coinPricesArray[coinEntries]);
-//     console.log("================END OF COIN =========================");
-// }
